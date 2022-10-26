@@ -1,0 +1,126 @@
+<h2 mat-dialog-title>Edit Client Details</h2>
+<mat-dialog-content class="mat-typography">
+  
+  <section class="section">
+    <div class="row">
+       <div class="col-md-8">
+
+  <form class="example-container" [formGroup]="options" [style.fontSize.px]="getFontSize()">
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+    </div>
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div></div>
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [color]="colorControl.value">
+      <mat-label>Color</mat-label>
+      <mat-select [formControl]="colorControl">
+        <mat-option value="primary">Primary</mat-option>
+        <mat-option value="accent">Accent</mat-option>
+        <mat-option value="warn">Warn</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+</div>
+
+     <div class="col-md-4">
+        <mat-slide-toggle color="Primary">Enable/Disable Account</mat-slide-toggle>
+        <mat-slide-toggle>All Trading Accounts Read Only Mode</mat-slide-toggle>
+        <mat-slide-toggle>Enable/Disable Deposits</mat-slide-toggle>
+        <mat-slide-toggle>Enable/Disable Withdrawals</mat-slide-toggle>
+        
+        <mat-divider></mat-divider>
+
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Add/Remove Credits</mat-label>
+          <input matInput value="Amount" #message>
+        </mat-form-field>
+        
+        
+        <button mat-raised-button class="add-circle-button" (click)="addCredit(message.value)"><mat-icon>add_circle</mat-icon></button>
+        <button mat-raised-button class="remove-circle-button" (click)="removeCredit(message.value)"><mat-icon>remove_circle</mat-icon>
+        </button>
+
+        <button mat-raised-button class="new-account-1" color="primary" (click)="createNew()">create new Account</button>
+        <button mat-raised-button class="new-account-2" color="warn" (click)="confirmDialog()">delete entire Profile</button>
+    </div> 
+  </div>
+  </section>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

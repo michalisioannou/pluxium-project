@@ -1,0 +1,78 @@
+<h2>Create New Account for Client:</h2>
+<section class="section">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="example-form">
+                
+                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Challenge</mat-label>
+                <input type="text"
+                        placeholder="Pick one"
+                        aria-label="Number"
+                        matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+                </mat-form-field>
+            </form>
+
+            <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Currency</mat-label>
+                <input type="text"
+                        placeholder="Pick one"
+                        aria-label="Number"
+                        matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+                </mat-form-field>
+            </form>
+
+            <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Leverage</mat-label>
+                <input type="text"
+                        placeholder="Pick one"
+                        aria-label="Number"
+                        matInput
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+                </mat-form-field>
+            </form>
+        </div>
+                <div class="col-md-6">
+                    <form class="form-toggle">
+                        <div>
+                            <mat-slide-toggle class="create-new-toggle" color="Primary">Enable</mat-slide-toggle>
+                        </div>
+                        <div>
+                        <mat-slide-toggle class="create-new-toggle">Read Only</mat-slide-toggle>
+                        </div>
+                        <div>
+                        <mat-slide-toggle class="create-new-toggle">Deposits</mat-slide-toggle>
+                        </div>
+                        <div>
+                        <mat-slide-toggle class="create-new-toggle">Withdrawals</mat-slide-toggle>
+                        </div>
+                        <div>
+                            <button class="create-save" mat-raised-button color="primary">Create</button>
+                            <button class="create-cancel" mat-raised-button color="warn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+</section>
