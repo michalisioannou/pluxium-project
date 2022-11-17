@@ -5,11 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatDialog } from "@angular/material/dialog";
-import {Observable} from 'rxjs';
+import {catchError, observable, of as observableOf, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import { ExportComponent } from 'src/app/materials/export/export.component';
 import { DialogexpComponent } from 'src/app/material/dialogexp/dialogexp.component';
+import {ClientsAllService} from "../../../services/clients-all.service";
+import {Client} from "../../../model/client";
 
 @Component({
   selector: 'app-clientsall',
@@ -23,11 +25,11 @@ import { DialogexpComponent } from 'src/app/material/dialogexp/dialogexp.compone
     ]),
   ],
 })
-export class ClientsallComponent {
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+export class ClientsallComponent implements OnInit {
+  dataSource = new MatTableDataSource<Client>();
   columnsToDisplay = ['userid', 'fullname', 'email', 'subscription'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: PeriodicElement | null;
+  expandedElement!: Client | null;
   displayedColumns = ['userid', 'fullname', 'email', 'subscription','star'];
   MenuPositionExample: [];
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
@@ -39,12 +41,13 @@ export class ClientsallComponent {
   });
   durationInSeconds = 5;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog, private _formBuilder: FormBuilder) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog,
+              private _formBuilder: FormBuilder, private clientsAllService: ClientsAllService) {}
 
   getFontSize() {
     return Math.max(10, this.fontSizeControl.value || 0);
   }
-  
+
   openDialog() {
     this.dialog.open(DialogexpComponent, {
       height: '450px',
@@ -83,19 +86,20 @@ export class ClientsallComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  ngOnInit(): void {
+    this.clientsAllService.LoadAllClients().
+    pipe(catchError(err => observableOf([]))).subscribe(data => this.dataSource.data = data);
+  }
+}
+
+class ClientsallComponentImpl extends ClientsallComponent {
 }
 
 
-export interface PeriodicElement {
-  userid: string;
-  fullname: string;
-  email: string;
-  subscription: string;
-  description: string;
-}
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const ELEMENT_DATA: Client[] = [
   {
     fullname: 'Client Test',
     userid: '123526',

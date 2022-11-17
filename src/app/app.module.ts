@@ -86,7 +86,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Accountsmt5Service } from './services/accountsmt5.service';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthService} from './services/auth.service';
+import {AuthInterceptor} from "./services/auth.interceptor";
+import {ClientsAllService} from "./services/clients-all.service";
 
 @NgModule({
   declarations: [
@@ -179,13 +182,21 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatCheckboxModule,
     HttpClientModule,
-    
+
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    ClientsAllService
+  ],
   bootstrap: [
     AppComponent,
     Accountsmt5Service
   ]
 })
-export class AppModule { 
+export class AppModule {
 }
