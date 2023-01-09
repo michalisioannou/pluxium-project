@@ -90,6 +90,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthService} from './services/auth.service';
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {ClientsAllService} from "./services/clients-all.service";
+import { EditcolumnComponent } from './material/editcolumn/editcolumn.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +152,7 @@ import {ClientsAllService} from "./services/clients-all.service";
     Challengesmt5Component,
     Challengesmt4Component,
     ConfirmDialogComponent,
+    EditcolumnComponent,
   ],
   imports: [
     BrowserModule,

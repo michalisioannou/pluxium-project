@@ -1,0 +1,17 @@
+<h2>Edit Columns:</h2>
+<section class="section">
+    <div class="row">
+        <div>
+            <form class="form-toggle display">
+                <ng-container *ngFor="let column of definedColumns">
+                    <mat-checkbox (change)="checkboxChanged($event, column)" [checked]="toggleCheckBox(column)">
+                        {{column}}</mat-checkbox>
+                </ng-container>
+            </form>
+            <div mat-dialog-actions>
+                <button mat-button (click)="closeDialog()">Cancel</button>
+                <button class="Save-button" mat-button (click)="saveDialog()">Save</button>
+            </div>
+        </div>
+    </div>
+</section>

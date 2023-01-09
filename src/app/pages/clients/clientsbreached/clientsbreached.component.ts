@@ -10,6 +10,7 @@ import {map, startWith} from 'rxjs/operators';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import { ExportComponent } from 'src/app/materials/export/export.component';
 import { DialogexpComponent } from 'src/app/material/dialogexp/dialogexp.component';
+import { EditcolumnComponent } from 'src/app/material/editcolumn/editcolumn.component';
 
 @Component({
   selector: 'app-clientsbreached',
@@ -24,11 +25,20 @@ import { DialogexpComponent } from 'src/app/material/dialogexp/dialogexp.compone
   ],
 })
 export class ClientsbreachedComponent {
+  clientid: string;
+  name: string;
+  surname: string;
+  country: string;
+  city: string;
+  email: string;
+  phone: string;
+  active: string;
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  columnsToDisplay = ['userid', 'fullname', 'email', 'subscription'];
+  definedColumns = ['clientid', 'name', 'surname', 'email', 'country', 'city', 'phone', 'active'];
+  columnsToDisplay = ['clientid', 'name', 'surname', 'email', 'country', 'city', 'phone', 'active'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: PeriodicElement | null;
-  displayedColumns = ['userid', 'fullname', 'email', 'subscription','star'];
+  displayedColumns = ['clientid', 'name', 'surname', 'email', 'country', 'city', 'phone', 'active','star'];
   MenuPositionExample: [];
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   colorControl = new FormControl('primary');
@@ -60,6 +70,23 @@ export class ClientsbreachedComponent {
     );
   }
 
+  openEditColumnDialog() {
+    const dialogRef = this.dialog.open(EditcolumnComponent, {
+      data: {
+        definedColumns: this.definedColumns,
+        columnsToDisplay: Object.assign([], this.columnsToDisplay)
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    const dialogSubmitSubscription =
+      dialogRef.componentInstance.submitClicked.subscribe(result => {
+        this.columnsToDisplay = result;
+        this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+        dialogSubmitSubscription.unsubscribe();
+      });
+  }
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -83,105 +110,124 @@ export class ClientsbreachedComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  toggleCheckBox(element: any) {
+    return (this.columnsToDisplay.indexOf(element) != -1) ? true : false;
+  }
 }
 
 
 export interface PeriodicElement {
-  userid: string;
-  fullname: string;
+  clientid: string;
+  name: string;
+  surname: string;
+  country: string;
+  city: string;
   email: string;
-  subscription: string;
-  description: string;
+  phone: string;
+  active: string;
 }
 
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    fullname: 'Client Test',
-    userid: '123526',
+    clientid: '123526',
+    name: 'Client Test',
     email: 'test@test.t.',
-    subscription: 'Basic',
-    description: ``,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '2',
-    userid: 'Helium',
+    name: '2',
+    clientid: 'Helium',
     email: 'test@test.t.',
-    subscription: 'He',
-    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '3',
-    userid: 'Lithium',
+    name: '3',
+    clientid: 'Lithium',
     email: 'test@test.t.',
-    subscription: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '4',
-    userid: 'Beryllium',
+    name: '4',
+    clientid: 'Beryllium',
     email: 'test@test.t.',
-    subscription: 'Be',
-    description: `Beryllium is a chemical element with symbol Be and atomic number 4. It is a
-        relatively rare element in the universe, usually occurring as a product of the spallation of
-        larger atomic nuclei that have collided with cosmic rays.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '5',
-    userid: 'Boron',
+    name: '5',
+    clientid: 'Boron',
     email: 'test@test.t.',
-    subscription: 'B',
-    description: `Boron is a chemical element with symbol B and atomic number 5. Produced entirely
-        by cosmic ray spallation and supernovae and not by stellar nucleosynthesis, it is a
-        low-abundance element in the Solar system and in the Earth's crust.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '6',
-    userid: 'Carbon',
+    name: '6',
+    clientid: 'Carbon',
     email: 'test@test.t.',
-    subscription: 'C',
-    description: `Carbon is a chemical element with symbol C and atomic number 6. It is nonmetallic
-        and tetravalent—making four electrons available to form covalent chemical bonds. It belongs
-        to group 14 of the periodic table.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '7',
-    userid: 'Nitrogen',
+    name: '7',
+    clientid: 'Nitrogen',
     email: 'test@test.t.',
-    subscription: 'N',
-    description: `Nitrogen is a chemical element with symbol N and atomic number 7. It was first
-        discovered and isolated by Scottish physician Daniel Rutherford in 1772.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '8',
-    userid: 'Oxygen',
+    name: '8',
+    clientid: 'Oxygen',
     email: 'test@test.t.',
-    subscription: 'O',
-    description: `Oxygen is a chemical element with symbol O and atomic number 8. It is a member of
-         the chalcogen group on the periodic table, a highly reactive nonmetal, and an oxidizing
-         agent that readily forms oxides with most elements as well as with other compounds.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '9',
-    userid: 'Fluorine',
+    name: '9',
+    clientid: 'Fluorine',
     email: 'test@test.t.',
-    subscription: 'F',
-    description: `Fluorine is a chemical element with symbol F and atomic number 9. It is the
-        lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard
-        conditions.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
   {
-    fullname: '10',
-    userid: 'Neon',
+    name: '10',
+    clientid: 'Neon',
     email: 'test@test.t.',
-    subscription: 'Ne',
-    description: `Neon is a chemical element with symbol Ne and atomic number 10. It is a noble gas.
-        Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about
-        two-thirds the density of air.`,
+    surname: 'Test',
+    country: 'Africa',
+    city: 'Basic',
+    phone: '234234',
+    active: 'Yes'
   },
 ];
 
